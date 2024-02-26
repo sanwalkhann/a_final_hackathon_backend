@@ -10,8 +10,8 @@ async function bootstrap() {
     origin: 'https://week-7-8-blogia-client.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   });
-
   app.useGlobalPipes(new ValidationPipe());
+  
   await app.listen(3001);
 }
 bootstrap();
