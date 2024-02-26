@@ -6,13 +6,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { NewsModule } from './news/news.module';
 import { LikeModule } from './like/like.module';
 import { CommentModule } from './comment/comment.module';
+import * as dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables from .env file
 
 @Module({
   imports: [
     AuthModule,
-    MongooseModule.forRoot(
-      'mongodb+srv://finalhackathon:12345@cluster0.zolkf6n.mongodb.net/?retryWrites=true&w=majority',
-    ),
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     NewsModule,
     LikeModule,
     CommentModule,
