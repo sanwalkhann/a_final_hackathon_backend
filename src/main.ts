@@ -1,17 +1,30 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+
+// import cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
+  // Enable global validation pipe
+
+   // Define CORS options
+   const corsOptions: CorsOptions = {
+    origin: ['https://u-evaluation-frontend.vercel.app'], // or specify your frontend URL(s) here
+    methods:  ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+  };
+
   // Enable CORS with options
-  app.enableCors({
-    origin: 'https://week-7-8-blogia-client.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  });
+  app.enableCors(corsOptions);
+ 
+
   app.useGlobalPipes(new ValidationPipe());
-  
-  await app.listen(3001);
+
+  // Start the application
+  await app.listen(3002);
+
 }
+
 bootstrap();
